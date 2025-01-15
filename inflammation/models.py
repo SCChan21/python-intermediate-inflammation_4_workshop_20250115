@@ -33,5 +33,5 @@ def daily_min(data):
     return np.min(data, axis=0)
 
 def daily_median(data):
-    """Calculate the daily mean of a 2d inflammation data array."""
+    """Calculate the daily median of a 2d inflammation data array."""
     return np.median(data, axis=0)
