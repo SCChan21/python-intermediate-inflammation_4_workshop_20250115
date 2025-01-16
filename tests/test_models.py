@@ -9,7 +9,7 @@ from inflammation.models import daily_mean, daily_max, daily_min
 @pytest.mark.parametrize(
     "test, expected, roger_that",
     [
-        ([[0, 0], [0, 0], [0, 0]], [0, 0], "Roger"),
+        ([[0, 0], [0, 0], [0, 0]], [0, 1], "Roger"),
         ([[1, 2], [3, 4], [5, 6]], [3, 4], "Yes Sir!")
     ]
 )
