@@ -52,3 +52,12 @@ def daily_median(data):
     :returns: numpy float or array (depending on shape of data)
     """
     return np.median(data, axis=0)
+
+
+def patient_normalise(data):
+    """ Normalize patient data from a 2D array """
+    ans = np.max(data, axis=1)
+    with np.errstate(invalid="ignore", divide="ignore"):
+        ans2 = data/ans[:, np.newaxis]
+    ans2[np.isnan(ans2)] = 0.0
+    return ans2

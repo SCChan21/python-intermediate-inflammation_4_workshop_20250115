@@ -1,10 +1,11 @@
 """Tests for statistics functions within the Model layer."""
+from pdb import set_trace
 
 import numpy as np
 from numpy import testing as npt
 import pytest
 
-from inflammation.models import daily_mean, daily_max, daily_min
+from inflammation.models import daily_mean, daily_max, daily_min, patient_normalise
 
 @pytest.mark.parametrize(
     "test, expected, roger_that",
@@ -17,6 +18,25 @@ def test_daily_mean_with_different_inputs(test, expected, roger_that):
     """ test daily mean with different inputs """
     npt.assert_array_equal(daily_mean(np.array(test)), np.array(expected))
     print(roger_that) # This does nothing for unittest
+
+
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+        ([[1, 2, 3], [4, 5, 6], [7, 8, 9]], [[0.33, 0.67, 1], [0.67, 0.83, 1], [0.78, 0.89, 1]]),
+        ([[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]])
+    ])
+def test_normalize_with_different_inputs(test, expected):
+    """ test daily mean with different inputs """
+    result = patient_normalise(np.array(test))
+    print(result)
+    # import pdb; pdb,set_trace()
+    # breakpoint() # Python function
+    npt.assert_allclose(result,
+                        np.array(expected),
+                        rtol=1E-2,
+                        atol=1E-2)
+
 
 
 def test_daily_mean_zeros():
