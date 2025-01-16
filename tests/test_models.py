@@ -7,21 +7,20 @@ import pytest
 from inflammation.models import daily_mean, daily_max, daily_min
 
 @pytest.mark.parametrize(
-    "test, expected",
+    "test, expected, roger_that",
     [
-        ([[0, 0], [0, 0], [0, 0]], [0, 0]),
-        ([[1, 2], [3, 4], [5, 6]], [3, 4])
+        ([[0, 0], [0, 0], [0, 0]], [0, 0], "Roger"),
+        ([[1, 2], [3, 4], [5, 6]], [3, 4], "Yes Sir!")
     ]
 )
-def test_daily_mean_with_different_inputs(test, expected):
+def test_daily_mean_with_different_inputs(test, expected, roger_that):
     """ test daily mean with different inputs """
     npt.assert_array_equal(daily_mean(np.array(test)), np.array(expected))
+    print(roger_that) # This does nothing for unittest
 
 
 def test_daily_mean_zeros():
     """Test that mean function works for an array of zeros."""
-    
-
     test_input = np.array([[0, 0],
                            [0, 0],
                            [0, 0]])
@@ -69,4 +68,5 @@ def test_daily_min_arange():
 def test_daily_mean_wrong_input():
 
     with pytest.raises(TypeError):
-        error_expected = daily_mean([['1', 2], ['biggus', 'dickus']])
+        error_expected = daily_mean([['1', 2], ['A', 'B']])
+        error_expected = daily_mean([['A', 'B'], ['biggus', 'dickus']])
