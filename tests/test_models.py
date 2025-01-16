@@ -38,7 +38,6 @@ def test_normalize_with_different_inputs(test, expected):
                         atol=1E-2)
 
 
-
 def test_daily_mean_zeros():
     """Test that mean function works for an array of zeros."""
     test_input = np.array([[0, 0],
@@ -90,4 +89,11 @@ def test_daily_mean_wrong_input():
     """ playing with pytest.raise """
     with pytest.raises(TypeError):
         error_expected = daily_mean([['1', 2], ['A', 'B']])
-        error_expected = daily_mean([['A', 'B'], ['biggus', 'dickus']])
+        # error_expected = daily_mean([['Polly', 'Exparrot'], ['Biggus', 'Dickus']])
+
+
+def test_normalize_negative_input():
+    """ playing with pytest.raise """
+    bad_data = [[1, 2, 3], [4, 5, 6], [7, 8, -9]]
+    with pytest.raises(ValueError):
+        error_expected = patient_normalise(np.array(bad_data))
