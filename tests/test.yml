@@ -1,0 +1,29 @@
+name: Kilimanjaro
+height_metres:
+  value: 5892
+  units: m
+  continent: Africa
+  country: Tanzania
+first_scaled_by: Hans Meyer
+scaled_by:
+  - name: Hans Meyer
+    year: 1958
+  - name: Lalafell Punter
+    year: 4321
+  - name: Superman
+    year: 1234
+
+#{
+#  "name": "Kilimanjaro",
+#  "height_metres": {
+#    "value": 5892,
+#    "units": "m"
+#  },
+#  "scaled_by": [
+#    {
+#      "name": "Hans Meyer",
+#      "year": 1958,
+#  },
+#  ],
+#  "first_scaled_by": "Hans Meyer",
+#}
