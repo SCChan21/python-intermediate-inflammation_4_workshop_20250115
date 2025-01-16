@@ -2,8 +2,21 @@
 
 import numpy as np
 import numpy.testing as npt
+import pytest
 
 from inflammation.models import daily_mean, daily_max, daily_min
+
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+        ([[0, 0], [0, 0], [0, 0]], [0, 0]),
+        ([[1, 2], [3, 4], [5, 6]], [3, 4])
+    ]
+)
+def test_daily_mean_with_different_inputs(test, expected):
+    """ test daily mean with different inputs """
+    npt.assert_array_equal(daily_mean(np.array(test)), np.array(expected))
+
 
 def test_daily_mean_zeros():
     """Test that mean function works for an array of zeros."""
@@ -51,3 +64,9 @@ def test_daily_min_arange():
 
     # Need to use Numpy testing functions to compare arrays
     npt.assert_array_equal(daily_min(test_input), test_result)
+
+
+def test_daily_mean_wrong_input():
+
+    with pytest.raises(TypeError):
+        error_expected = daily_mean([['1', 2], ['biggus', 'dickus']])
