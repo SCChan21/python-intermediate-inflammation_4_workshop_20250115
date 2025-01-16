@@ -55,15 +55,16 @@ def daily_median(data):
 
 
 def all_negatives_must_die(data):
+    """ Negative values? Bye, sayonara, get lost, blah blah blah"""
     return np.any(data < 0)
 
 
 def patient_normalise(data):
-    """ Normalize patient data from a 2D array """
+    """Normalize patient data from a 2D array"""
     ans = np.max(data, axis=1)
     if all_negatives_must_die(data):
-        raise ValueError('Negatives detected; thou shall not pass.')
+        raise ValueError("Negatives detected; thou shall not pass.")
     with np.errstate(invalid="ignore", divide="ignore"):
-        ans2 = data/ans[:, np.newaxis]
+        ans2 = data / ans[:, np.newaxis]
     ans2[np.isnan(ans2)] = 0.0
     return ans2
