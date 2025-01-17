@@ -15,14 +15,14 @@ def main(args):
     - selecting the necessary models and views for the current task
     - passing data between models and views
     """
-    infiles = args.infiles
-    if not isinstance(infiles, list):
-        infiles = [args.infiles]
+    in_files = args.infiles
+    if not isinstance(in_files, list):
+        in_files = [args.infiles]
 
 
     if args.full_data_analysis:
-        data_src = os.path.dirname(infiles[0])
-        _, data_ext = os.path.splitext(infiles[0])
+        data_src = os.path.dirname(in_files[0])
+        _, data_ext = os.path.splitext(in_files[0])
         if data_ext == ".csv":
             src_type = CSVDataSrc
         elif data_ext == ".json":
