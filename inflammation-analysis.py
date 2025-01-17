@@ -19,7 +19,6 @@ def main(args):
     if not isinstance(in_files, list):
         in_files = [args.infiles]
 
-
     if args.full_data_analysis:
         data_src = os.path.dirname(in_files[0])
         _, data_ext = os.path.splitext(in_files[0])
@@ -46,12 +45,14 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description='A basic patient inflammation data management system')
+        description="A basic patient inflammation data management system"
+    )
 
     parser.add_argument(
-        'infiles',
-        nargs='+',
-        help='Input CSV(s) containing inflammation series for each patient')
+        "infiles",
+        nargs="+",
+        help="Input CSV(s) containing inflammation series for each patient",
+    )
 
     parser.add_argument(
         '--full-data-analysis',
@@ -59,5 +60,7 @@ if __name__ == "__main__":
         dest='full_data_analysis')
 
     args = parser.parse_args()
+
+    print("This is a really useful print statement.")
 
     main(args)
