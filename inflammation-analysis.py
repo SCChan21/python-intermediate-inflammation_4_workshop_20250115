@@ -32,7 +32,7 @@ def main(args):
         analyse_data(data_src, src_type=src_type)
         return
 
-    for filename in infiles:
+    for filename in in_files:
         inflammation_data = models.load_csv(filename)
 
         view_data = {
