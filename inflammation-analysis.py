@@ -2,9 +2,11 @@
 """Software for managing and analysing patients' inflammation data in our imaginary hospital."""
 
 import argparse
+import os
 
 from inflammation import models, views
-
+from inflammation.compute_data import analyse_data
+from inflammation.compute_data import CSVDataSrc, JSONDataSrc
 
 def main(args):
     """The MVC Controller of the patient inflammation data system.
@@ -16,6 +18,18 @@ def main(args):
     in_files = args.infiles
     if not isinstance(in_files, list):
         in_files = [args.infiles]
+
+    if args.full_data_analysis:
+        data_src = os.path.dirname(in_files[0])
+        _, data_ext = os.path.splitext(in_files[0])
+        if data_ext == ".csv":
+            src_type = CSVDataSrc
+        elif data_ext == ".json":
+            src_type = JSONDataSrc
+        else:
+            raise ValueError('Unknown extension: {data_ext}')
+        analyse_data(data_src, src_type=src_type)
+        return
 
     for filename in in_files:
         inflammation_data = models.load_csv(filename)
@@ -39,6 +53,11 @@ if __name__ == "__main__":
         nargs="+",
         help="Input CSV(s) containing inflammation series for each patient",
     )
+
+    parser.add_argument(
+        '--full-data-analysis',
+        action='store_true',
+        dest='full_data_analysis')
 
     args = parser.parse_args()
 
